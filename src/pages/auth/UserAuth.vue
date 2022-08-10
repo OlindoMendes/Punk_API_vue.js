@@ -13,7 +13,7 @@
         <p v-if="isValid" class="errors">
           Por favor, entre com um email válido e senha (maior que 6 carateres!)
         </p>
-        {{dada}}ddsds
+        
         <base-button>{{ captionButton }}</base-button>
         <base-button type="button" mode="flat" @click="switchAuthMode">{{
           captionButtonMode
@@ -87,12 +87,16 @@ export default {
           error.message ||
           "Falha ao autenticar, tente mais tarde. Verifique os seus dados!";
       }
+      this.email = ''
+      this.password = ''
     },
     switchAuthMode() {
-      console.log(this.mode);
+      
       if (this.mode === "login") {
         this.mode = "signup";
+        console.log(this.mode)
       } else this.mode = "login";
+      console.log(this.mode)
     },
     handleError() {
       this.error = false;
@@ -102,10 +106,12 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" >
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
 form {
   margin: 1rem;
   padding: 1rem;
+  font-family: 'Poppins';
 }
 
 .form-control {
@@ -118,17 +124,15 @@ label {
   display: block;
 }
 
-input,
-textarea {
+input {
   display: block;
   width: 100%;
-  font: inherit;
   border: 1px solid #ccc;
+  border-radius: 5px;
   padding: 0.15rem;
 }
 
-input:focus,
-textarea:focus {
+input:focus{
   border-color: #3d008d;
   background-color: #faf6ff;
   outline: none;

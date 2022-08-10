@@ -12,11 +12,14 @@
   </header>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
 header {
   width: 100%;
   height: 5rem;
   background-color: #3d008d;
+  font-family: 'Poppins';
+
   display: flex;
   justify-content: center;
   align-items: center;

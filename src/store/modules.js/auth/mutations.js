@@ -6,5 +6,12 @@ export default {
     },
     LOAD_BEERS(state, payload){
         state.beers = payload
-    }
+    },
+    DELETE_BEER(state, ID) {
+        state.beers = state.beers.filter(beer => {
+            return beer.id !== ID
+        })
+    },
+
+    
 }

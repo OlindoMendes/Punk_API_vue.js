@@ -9,6 +9,8 @@ import BaseBadge from './components/ui/BaseBadge'
 import BaseSpinner from './components/ui/BaseSpinner'
 import BaseDialog from './components/ui/BaseDialog'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import { ToastPlugin } from 'bootstrap-vue'
+Vue.use(ToastPlugin)
 
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'

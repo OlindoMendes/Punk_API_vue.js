@@ -79,4 +79,7 @@ export default {
   
         
   },
+  beerDelete({commit}, ID){
+    commit('DELETE_BEER', ID)
+  }
 };

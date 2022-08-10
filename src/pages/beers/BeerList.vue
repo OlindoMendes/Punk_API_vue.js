@@ -1,20 +1,29 @@
 <template>
   <div class="container">
+    
     <div class="mt-3">
-      <h6>Goto first and last button number</h6>
+
       <b-pagination
         v-model="currentPage"
         :total-rows="rows"
         :per-page="perPage"
-        :first-number = first
-        :last-number = last
+        :first-number="first"
+        :last-number="last"
+        align="fill"
         @change="changePage"
       ></b-pagination>
     </div>
     <div class="beers">
       <div class="beer" v-for="beer in beers" :key="beer.id">
-        <h4 class="card-title">{{ beer.name }}</h4>
+      <a @click="deleteBeer(beer.id)"><b-icon
+          class="fa-star"
+          icon="trash"
+          scale="1"
+          variant="danger"
+          shift-h="2"
+        ></b-icon></a>
         <img :src="beer.image_url" />
+        <h4 class="card-title">{{ beer.name }}</h4>
         <p class="card-text">{{ beer.tagline }}</p>
       </div>
     </div>
@@ -30,7 +39,7 @@ export default {
       perPage: 1,
       currentPage: 1,
       first: null,
-      last: null
+      last: null,
     };
   },
   mounted() {
@@ -41,26 +50,37 @@ export default {
       beers: "auth/getBeers",
     }),
   },
-  methods:{
-    changePage(){
-        console.log('clique')
-         if (this.currentPage === 1) {
-        this.first  = true;
-    } else {
+  methods: {
+    changePage() {
+      console.log("clique");
+      if (this.currentPage === 1) {
+        this.first = true;
+      } else {
         this.first = false;
-    }
-        this.$store.dispatch("auth/getBeers", {
-            rows: this.rows,
-            perPage: this.perPage,
-            current: this.currentPage
+      }
+      this.$store.dispatch("auth/getBeers", {
+        rows: this.rows,
+        perPage: this.perPage,
+        current: this.currentPage,
+      });
+    },
+    deleteBeer(id) {
+      this.$store.dispatch("auth/beerDelete", id);
+      this.$bvToast.toast("Exclcuindo bebida...", {
+          title: `Excluindo...`,
+          variant: "danger",
+          solid: true,
         })
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 .container {
+  font-family: "Roboto";
+
   max-width: 900px;
   margin: 0 auto;
   position: relative;
@@ -83,6 +103,9 @@ export default {
       color: #d6d6d6;
       cursor: pointer;
       font-size: 18px;
+    }
+    .card-title{
+        margin: 10px;
     }
   }
 }
