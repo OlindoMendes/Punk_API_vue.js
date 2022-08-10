@@ -1,5 +1,5 @@
 export default {
-  async login({commit}, payload) {
+  async login({ commit }, payload) {
     const bodyPayload = {
       method: "POST",
       body: JSON.stringify({
@@ -59,5 +59,17 @@ export default {
       userID: responseData.localID,
       tokenExpiration: responseData.expiresIn,
     });
+  },
+  async loadBeers({ commit }) {
+    console.log("aqui");
+
+    const response = await fetch("https://api.punkapi.com/v2/beers");
+    const responseData = await response.json();
+    commit("LOAD_BEERS", responseData);
+    if (!response.ok) {
+      console.log(responseData);
+      const error = new Error(responseData.message || "Erro ao autenticar!");
+      throw error;
+    }
   },
 };

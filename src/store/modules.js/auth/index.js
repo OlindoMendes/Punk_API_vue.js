@@ -8,7 +8,8 @@ export default {
         return {
             userID: null,
             token: null,
-            tokenExpiration: null
+            tokenExpiration: null,
+            beers:[]
         }
     },
     mutations,

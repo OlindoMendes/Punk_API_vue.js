@@ -13,6 +13,7 @@
         <p v-if="isValid" class="errors">
           Por favor, entre com um email válido e senha (maior que 6 carateres!)
         </p>
+        {{dada}}ddsds
         <base-button>{{ captionButton }}</base-button>
         <base-button type="button" mode="flat" @click="switchAuthMode">{{
           captionButtonMode
@@ -33,6 +34,7 @@ export default {
       mode: "login",
       isLoading: false,
       error: null,
+      dada: null
     };
   },
   computed: {
@@ -55,6 +57,7 @@ export default {
   },
   methods: {
     async signUp() {
+      this.dada = this.$store.getters['auth/getBeers']
       this.isValid = false;
       if (
         this.emailAddress === "" ||
