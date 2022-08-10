@@ -72,4 +72,11 @@ export default {
       throw error;
     }
   },
+ async  getBeers({ commit }, payload) {
+    const response =await  fetch(`https://api.punkapi.com/v2/beers?per_page=80&page=${payload.current}`)
+    const responseData = await response.json();
+    commit("LOAD_BEERS", responseData);
+  
+        
+  },
 };
