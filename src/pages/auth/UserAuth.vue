@@ -13,9 +13,8 @@
         </p>
 
         <base-button>{{ captionButton }}</base-button>
-        <base-button type="button" mode="flat" @click="switchAuthMode">{{
-          captionButtonMode
-        }}</base-button>
+        <button class="flat" type="button" mode="flat" @click="switchAuthMode">{{captionButtonMode
+        }}</button>
       </form></base-card
     >
   </div>
@@ -32,13 +31,11 @@ export default {
       mode: "login",
       isLoading: false,
       error: null,
-      dada: null,
     };
   },
   computed: {
     captionButton() {
       if (this.mode === "login") {
-        console.log(this.mode);
         return "Login";
       } else {
         return "Registrar";
@@ -46,7 +43,6 @@ export default {
     },
     captionButtonMode() {
       if (this.mode === "login") {
-        console.log(this.mode);
         return "Registre-se aqui!";
       } else {
         return "Faça o Login!";
@@ -55,7 +51,6 @@ export default {
   },
   methods: {
     async signUp() {
-      this.dada = this.$store.getters["auth/getBeers"];
       this.isValid = false;
       if (
         this.emailAddress === "" ||
@@ -70,17 +65,18 @@ export default {
       const actionPayload = {
         email: this.email,
         password: this.password,
+        mode: this.mode
       };
 
       try {
         if (this.mode === "login") {
-          console.log("aqui");
           await this.$store.dispatch("auth/login", actionPayload);
-          this.$router.push('/beers')
-          this.clearForm()
+          this.$router.push("/beers");
+          this.clearForm();
         } else {
           await this.$store.dispatch("auth/signUp", actionPayload);
-          this.clearForm()
+          this.$router.push("/beers");
+          this.clearForm();
           this.isLoading = false;
         }
       } catch (error) {
@@ -94,11 +90,11 @@ export default {
       this.password = "";
     },
     switchAuthMode() {
+      console.log('aqui')
       if (this.mode === "login") {
         this.mode = "signup";
-        console.log(this.mode);
       } else this.mode = "login";
-      console.log(this.mode);
+      
     },
   },
   components: { BaseBadge },
@@ -121,6 +117,41 @@ label {
   font-weight: bold;
   margin-bottom: 0.5rem;
   display: block;
+}
+
+.flat {
+  background-color: transparent;
+  color: #209b86;
+  border: none;
+  border-radius: 30px;
+}
+
+.outline {
+  background-color: transparent;
+  border-color: #209b86;
+  color: #ffffff;
+}
+
+button {
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  font: inherit;
+  background-color: #209b86;
+  border: 1px solid #209b86;
+  color: white;
+  cursor: pointer;
+  border-radius: 30px;
+  margin: 5px;
+  display: inline-block;
+}
+
+
+.flat:hover,
+.flat:active,
+.outline:hover,
+.outline:active {
+  background-color: #a8e9de;
+  color: #ffffff;
 }
 
 input {

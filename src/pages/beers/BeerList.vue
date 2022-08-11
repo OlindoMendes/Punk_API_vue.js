@@ -12,6 +12,7 @@
         align="fill"
         @change="changePage"
       ></b-pagination>
+      
     </div>
     <div class="beers">
       <div class="beer" v-for="beer in beers" :key="beer.id">

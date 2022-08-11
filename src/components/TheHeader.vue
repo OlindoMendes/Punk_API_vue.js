@@ -5,12 +5,28 @@
         <router-link to="/"><img src="../assets/garupa.jpg" >GARUPA  WEB</router-link>
       </h1>
       <ul>
-        <li><router-link to="auth">Login</router-link></li>
-        <li><router-link to="signup">Registrar</router-link></li>
+        <li v-if="!isLoggedIn"><router-link to="auth">Login</router-link></li>
+        <li v-else><base-button @click="logout">Logout </base-button></li>
       </ul>
     </nav>
   </header>
 </template>
+
+<script>
+export default{
+  computed:{
+    isLoggedIn(){
+      return this.$store.getters.isAuthenticated
+    }
+  },
+  methods:{
+    logout(){
+      this.$store.dispatch('auth/logOut')
+      this.$router.push('/')
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');

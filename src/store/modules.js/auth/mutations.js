@@ -13,8 +13,11 @@ export default {
         })
     },
     EDIT_BEER(state, payload ){
-        state.beers
-    }
-
+        state.beers[payload] = state.beers
     
+    },
+    LOG_OUT(state, payload){
+            state.token =  payload.token,
+            state.tokenExpiration = payload.tokenExpiration
+    }
 }

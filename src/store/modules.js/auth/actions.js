@@ -1,50 +1,32 @@
 export default {
-  async login({ commit }, payload) {
-    const bodyPayload = {
-      method: "POST",
-      body: JSON.stringify({
-        email: payload.email,
-        password: payload.password,
-        returnSecureToken: true,
-      }),
-    };
-    const response = await fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDyrA01ieQpsPFaqwY7CfIASNNDNX7xR3o",
-      bodyPayload
-    );
-
-    const responseData = await response.json();
-
-    if (!response.ok) {
-      console.log(responseData);
-      const error = new Error(responseData.message || "Erro ao autenticar!");
-      throw error;
-    }
-
-    console.log(responseData);
-
-    commit("SET_USER", {
-      token: responseData.idToken,
-      userID: responseData.localID,
-      tokenExpiration: responseData.expiresIn,
-    });
-    
+  async login({ dispatch }, payload) {
+    console.log(payload)
+    return dispatch('auth', {
+      ...payload, mode: payload.mode
+    })
   },
-  async signUp({ commit }, payload) {
-    console.log(payload);
-    const bodyPayload = {
-      method: "POST",
-      body: JSON.stringify({
-        email: payload.email,
-        password: payload.password,
-        returnSecureToken: true,
-      }),
-    };
-    const response = await fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDyrA01ieQpsPFaqwY7CfIASNNDNX7xR3o",
-      bodyPayload
-    );
+  async signUp({ dispatch }, payload) {
+    return dispatch('auth', {
+      ...payload, mode: payload.mode
+    })
+  },
+  async auth({commit}, payload){
+    const mode = payload.mode
+    let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDyrA01ieQpsPFaqwY7CfIASNNDNX7xR3o'
 
+    if(mode === 'signup'){
+      url ='https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDyrA01ieQpsPFaqwY7CfIASNNDNX7xR3o'
+    }
+    const response = await fetch(url, 
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: payload.email,
+          password: payload.password,
+          returnSecureToken: true,
+        }),
+      }
+    );
     const responseData = await response.json();
 
     if (!response.ok) {
@@ -53,7 +35,7 @@ export default {
       throw error;
     }
 
-    console.log(responseData);
+    
 
     commit("SET_USER", {
       token: responseData.idToken,
@@ -83,11 +65,13 @@ export default {
   beerDelete({commit}, ID){
     commit('DELETE_BEER', ID)
   },
-  editBeer( {commit, state}, payload){
-    console.log(payload)
-    console.log(state.beers)
-    // const beer = state.beers.find(beer => beer.id === this.$route.params.id)
+  editBeer( {commit}, payload){
     commit('EDIT_BEER', payload)
 
+  },
+  logOut({commit}){
+    commit('LOG_OUT', {token: null,
+      tokenExpiration:null})
   }
+
 };
