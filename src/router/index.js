@@ -16,6 +16,12 @@ const routes = [
     component: BeerList
     
   },
+  {
+    path: '/beers/:id/edit',
+    name: 'editbeer',
+    component: () => import('@/pages/beers/EditBeer'),
+    params: true
+},
 ]
 
 const router = new VueRouter({

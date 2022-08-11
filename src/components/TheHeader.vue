@@ -2,7 +2,7 @@
   <header>
     <nav>
       <h1>
-        <router-link to="/">GARUPA APP</router-link>
+        <router-link to="/"><img src="../assets/garupa.jpg" >GARUPA  WEB</router-link>
       </h1>
       <ul>
         <li><router-link to="auth">Login</router-link></li>
@@ -17,7 +17,7 @@
 header {
   width: 100%;
   height: 5rem;
-  background-color: #3d008d;
+  background-color: #209b86;
   font-family: 'Poppins';
 
   display: flex;
@@ -27,7 +27,7 @@ header {
 
 header a {
   text-decoration: none;
-  color: #f391e3;
+  color: #ffffff;
   display: inline-block;
   padding: 0.75rem 1.5rem;
   border: 1px solid transparent;
@@ -36,7 +36,8 @@ header a {
 a:active,
 a:hover,
 a.router-link-active {
-  border: 1px solid #f391e3;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
 }
 
 h1 {
@@ -73,5 +74,8 @@ header ul {
 
 li {
   margin: 0 0.5rem;
+}
+img {
+  width: 10%;
 }
 </style>

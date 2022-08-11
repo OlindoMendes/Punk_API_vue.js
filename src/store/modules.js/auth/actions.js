@@ -28,6 +28,7 @@ export default {
       userID: responseData.localID,
       tokenExpiration: responseData.expiresIn,
     });
+    
   },
   async signUp({ commit }, payload) {
     console.log(payload);
@@ -81,5 +82,12 @@ export default {
   },
   beerDelete({commit}, ID){
     commit('DELETE_BEER', ID)
+  },
+  editBeer( {commit, state}, payload){
+    console.log(payload)
+    console.log(state.beers)
+    // const beer = state.beers.find(beer => beer.id === this.$route.params.id)
+    commit('EDIT_BEER', payload)
+
   }
 };

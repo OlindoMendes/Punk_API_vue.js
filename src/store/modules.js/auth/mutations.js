@@ -12,6 +12,9 @@ export default {
             return beer.id !== ID
         })
     },
+    EDIT_BEER(state, payload ){
+        state.beers
+    }
 
     
 }
