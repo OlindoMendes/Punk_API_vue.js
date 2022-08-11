@@ -90,7 +90,6 @@ export default {
       this.password = "";
     },
     switchAuthMode() {
-      console.log('aqui')
       if (this.mode === "login") {
         this.mode = "signup";
       } else this.mode = "login";

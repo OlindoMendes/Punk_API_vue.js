@@ -3,7 +3,7 @@ export default {
     return state.beers
 },
 isAuthenticated(state){
-    return state.token
+    return !!state.token
 }
 
 }

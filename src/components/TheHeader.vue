@@ -5,8 +5,8 @@
         <router-link to="/"><img src="../assets/garupa.jpg" >GARUPA  WEB</router-link>
       </h1>
       <ul>
-        <li v-if="!isLoggedIn"><router-link to="auth">Login</router-link></li>
-        <li v-else><base-button @click="logout">Logout </base-button></li>
+        
+        <li><button @click="logout">Logout </button></li>
       </ul>
     </nav>
   </header>
@@ -94,4 +94,26 @@ li {
 img {
   width: 10%;
 }
+
+button {
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  font: inherit;
+  background-color: #209b86;
+  border: 1px solid #209b86;
+  color: white;
+  cursor: pointer;
+  border-radius: 30px;
+  margin: 5px;
+  display: inline-block;
+}
+
+
+button:hover,
+button:active {
+  background-color: #156e5f;
+  border-color: #209b86;
+}
+
+
 </style>
